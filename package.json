@@ -1,0 +1,30 @@
+{
+  "name": "puppeteer-upyun-node-sdk",
+  "version": "1.0.0",
+  "description": "test upyun node sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SallyOne/puppeteer-upyun-node-sdk.git"
+  },
+  "keywords": [
+    "node",
+    "sdk",
+    "puppeteer"
+  ],
+  "author": "lin.xiao@upai.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SallyOne/puppeteer-upyun-node-sdk/issues"
+  },
+  "homepage": "https://github.com/SallyOne/puppeteer-upyun-node-sdk#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "jsdom": "^16.2.1",
+    "puppeteer": "^2.1.1",
+    "upyun": "^3.4.1"
+  }
+}
