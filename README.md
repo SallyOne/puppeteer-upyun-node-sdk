@@ -2,4 +2,4 @@
 test upyun node sdk
 
 ### run
-node puppeteer.js
+`node puppeteer.js`
