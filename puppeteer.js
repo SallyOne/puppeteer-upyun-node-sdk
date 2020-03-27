@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer');
-const upyunHandle = require('./upyun');
-const fs = require('fs');
+const upyun = require('upyun');
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -11,15 +10,15 @@ const fs = require('fs');
   await page.setContent('<!DOCTYPE html><head></head><body></body></html>');
   await page.addScriptTag({ path: './node_modules/axios/dist/axios.js' });
   await page.addScriptTag({ path: './node_modules/upyun/dist/upyun.js' });
-  // await page.evaluateOnNewDocument(fs.readFileSync('./node_modules/axios/dist/axios.js', 'utf8'));
-  // await page.evaluateOnNewDocument(fs.readFileSync('./node_modules/upyun/dist/upyun.js', 'utf8'));
-  await page.exposeFunction('createClient', async (clientString, service) => {
-    return await upyunHandle.createClient(new Function('return ' + clientString)(), service);
+  await page.exposeFunction('getSignHeader', (bucket, method, path) => {
+    console.log(upyun.sign.getHeaderSign(bucket, method, path));
+    return Promise.resolve(upyun.sign.getHeaderSign(bucket, method, path));
   });
   await page.evaluate(async function () {
-    console.log(1);
-    const client = await window.createClient(window.upyun.Client.toString(), 'helloworldtest12');
+    const client = await Promise.resolve(new window.upyun.Client(new window.upyun.Bucket('helloworldtest12'), window.getSignHeader));
     console.log(client);
+    const size = await client.listDir('/test11/');
+    console.log(size);
   });
   // await browser.close();
 })();
